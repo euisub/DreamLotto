@@ -1,3 +1,4 @@
 User-agent: *
 Allow:/
 Sitemap:https://dreamnumber.netlify.app/sitemap.xml
+DaumWebMasterTool:9fda5e8fedacae11dc0cebe4ec7e6874ae471ecb8547d92dee5de9abfe3e5b00:GB2Vuheo9c/+5pAQyPFPjQ==
