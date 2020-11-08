@@ -49,7 +49,7 @@
 			content="http://www.mysite.com/article/article1_featured_image.jpg"
 		/> -->
 		<meta property="og:url" content="https://dreamnumber.netlify.app/index.html" />
-		...
+
 		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:title" content="꿈해몽숫자 로또번호생성" />
 		<meta
@@ -190,15 +190,14 @@
 			</div>
 		</div>
 		<div id="pop1">
-			<div class="wrapper">
-				<button type="button" id="btnGenerate">번호생성</button
-				>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="button" id="btnGenerate_b">전체복사</button>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="button" id="btnGenerate_d">번호삭제</button
-				>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="button" id="btnGenerate_x">초기화</button>
-			</div>
+			<button type="button" id="btnGenerate" onclick="generate()">번호생성</button
+			>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="button" id="btnGenerate_b">전체복사</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="button" id="btnGenerate_d" onclick="fn_userDel()">번호삭제</button
+			>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="button" id="btnGenerate_x" onclick="display(3)">초기화</button>
+			<div class="wrapper"></div>
 		</div>
 
 		<div id="pop2" style="display: none;">
@@ -846,10 +845,16 @@
 					<td width="8"></td>
 
 					<td width="225" align="left">
-						<button type="button" id="btnGenerate_2">번호생성</button><br /><br />
+						<button type="button" id="btnGenerate_2" onclick="generate_Check()">
+							번호생성</button
+						><br /><br />
 						<button type="button" id="btnGenerate_b_2">전체복사</button><br /><br />
-						<button type="button" id="btnGenerate_d_2">번호삭제</button><br /><br />
-						<button type="button" id="btnGenerate_x_2">초기화</button>
+						<button type="button" id="btnGenerate_d_2" onclick="fn_userDel()">
+							번호삭제</button
+						><br /><br />
+						<button type="button" id="btnGenerate_x_2" onclick="display(3)">
+							초기화
+						</button>
 					</td>
 				</tr>
 			</table>
@@ -859,7 +864,7 @@
 			<br /><br />
 		</div>
 		<br /><br />
-		<!-- Go to www.addthis.com/dashboard to customize your tools -->
+
 		<div class="addthis_inline_share_toolbox"></div>
 
 		<script>
@@ -879,6 +884,7 @@
 				document.getElementById('btnCot_4_4').value = document.getElementById(
 					'btnCot_4'
 				).value;
+				console.log('aaaa');
 			}
 
 			function changeSelect2() {
@@ -920,17 +926,12 @@
 				}
 			}
 		</script>
-		<!-- <!-- 자동랜덤숫자 pop1 -->
+
 		<script>
-			let btn = document.getElementById('btnGenerate');
-			let btn_d = document.getElementById('btnGenerate_d');
-			let btn_x = document.getElementById('btnGenerate_x');
+
 			let wrapper = document.getElementsByClassName('wrapper')[0];
 
-			let btn_2 = document.getElementById('btnGenerate_2');
-			let btn_d_2 = document.getElementById('btnGenerate_d_2');
-			let btn_x_2 = document.getElementById('btnGenerate_x_2');
-			let btn_s_2 = document.getElementById('btnGenerate_s_2');
+
 			let wrapper_2 = document.getElementsByClassName('wrapper')[1];
 
 			let maxNum = 45;
@@ -942,44 +943,6 @@
 			let dupliChange = [];
 			let dupliChange_2 = [];
 
-			let du_len = 0;
-			btn.addEventListener('click', (e) => {
-				e.preventDefault;
-				generate();
-				display(1);
-			});
-			btn_d.addEventListener('click', (e) => {
-				e.preventDefault;
-
-				fn_userDel();
-			});
-			btn_x.addEventListener('click', (e) => {
-				e.preventDefault;
-
-				display(3);
-			});
-
-			//pop 2 button start
-			btn_2.addEventListener('click', (e) => {
-				e.preventDefault;
-
-				generate_Check();
-			});
-			btn_d_2.addEventListener('click', (e) => {
-				e.preventDefault;
-
-				fn_userDel();
-			});
-			btn_x_2.addEventListener('click', (e) => {
-				e.preventDefault;
-
-				display(3);
-			});
-
-			btn_s_2.addEventListener('click', (e) => {
-				e.preventDefault;
-				reSet_sel();
-			});
 			function generate() {
 				while (arrayOfNumbers.length < 6) {
 					let number = Math.floor(Math.random() * maxNum) + 1;
@@ -1002,439 +965,430 @@
 				console.log(duplication);
 
 				arrayOfNumbers = [];
+
+				display(1);
 			}
 
 			function generate_Check() {
-				var selNum1 = Number($('#btnCot_0 option:selected').val());
-				var selNum2 = Number($('#btnCot_1 option:selected').val());
-				var selNum3 = Number($('#btnCot_2 option:selected').val());
-				var selNum4 = Number($('#btnCot_3 option:selected').val());
-				var selNum5 = Number($('#btnCot_4 option:selected').val());
+			var selNum1 = Number($('#btnCot_0 option:selected').val());
+			var selNum2 = Number($('#btnCot_1 option:selected').val());
+			var selNum3 = Number($('#btnCot_2 option:selected').val());
+			var selNum4 = Number($('#btnCot_3 option:selected').val());
+			var selNum5 = Number($('#btnCot_4 option:selected').val());
 
-				var selTotal = selNum1 + selNum2 + selNum3 + selNum4 + selNum5;
+			var selTotal = selNum1 + selNum2 + selNum3 + selNum4 + selNum5;
 
-				var y_count_0 = [];
-				var y_count_1 = [];
-				var y_count_2 = [];
-				var y_count_3 = [];
-				var y_count_4 = [];
+			var y_count_0 = [];
+			var y_count_1 = [];
+			var y_count_2 = [];
+			var y_count_3 = [];
+			var y_count_4 = [];
 
-				var r_count_0 = [];
-				var r_count_1 = [];
-				var r_count_2 = [];
-				var r_count_3 = [];
-				var r_count_4 = [];
+			var r_count_0 = [];
+			var r_count_1 = [];
+			var r_count_2 = [];
+			var r_count_3 = [];
+			var r_count_4 = [];
 
-				if (selTotal > 6) {
-					alert('로또조합은 숫자 6개 입니다. 설정값을 확인해주세요.');
-				} else {
-					var result = 0;
+			if (selTotal > 6) {
+			alert('로또조합은 숫자 6개 입니다. 설정값을 확인해주세요.');
+			} else {
+			var result = 0;
 
-					for (j = 0; j < redCount; j++) {
-						var check_n = 0;
-						if (Math.floor(redArr[j] / 10) == 0) {
-							var search = r_count_0.indexOf(redArr[j]);
-							if (search != -1) {
-								r_count_0.splice(search, 1);
-							}
-							r_count_0.push(redArr[j]);
-						} else if (Math.floor(redArr[j] / 10) == 1) {
-							var search = r_count_1.indexOf(redArr[j]);
-							if (search != -1) {
-								r_count_1.splice(search, 1);
-							}
-							r_count_1.push(redArr[j]);
-						} else if (Math.floor(redArr[j] / 10) == 2) {
-							var search = r_count_2.indexOf(redArr[j]);
-							if (search != -1) {
-								r_count_2.splice(search, 1);
-							}
-							r_count_2.push(redArr[j]);
-						} else if (Math.floor(redArr[j] / 10) == 3) {
-							var search = r_count_3.indexOf(redArr[j]);
-							if (search != -1) {
-								r_count_3.splice(search, 1);
-							}
-							r_count_3.push(redArr[j]);
-						} else if (Math.floor(redArr[j] / 10) == 4) {
-							var search = r_count_4.indexOf(redArr[j]);
-							if (search != -1) {
-								r_count_4.splice(search, 1);
-							}
-							r_count_4.push(redArr[j]);
-						}
-					}
+			for (j = 0; j < redCount; j++) {
+			var check_n = 0;
+			if (Math.floor(redArr[j] / 10) == 0) {
+			var search = r_count_0.indexOf(redArr[j]);
+			if (search != -1) {
+			r_count_0.splice(search, 1);
+			}
+			r_count_0.push(redArr[j]);
+			} else if (Math.floor(redArr[j] / 10) == 1) {
+			var search = r_count_1.indexOf(redArr[j]);
+			if (search != -1) {
+			r_count_1.splice(search, 1);
+			}
+			r_count_1.push(redArr[j]);
+			} else if (Math.floor(redArr[j] / 10) == 2) {
+			var search = r_count_2.indexOf(redArr[j]);
+			if (search != -1) {
+			r_count_2.splice(search, 1);
+			}
+			r_count_2.push(redArr[j]);
+			} else if (Math.floor(redArr[j] / 10) == 3) {
+			var search = r_count_3.indexOf(redArr[j]);
+			if (search != -1) {
+			r_count_3.splice(search, 1);
+			}
+			r_count_3.push(redArr[j]);
+			} else if (Math.floor(redArr[j] / 10) == 4) {
+			var search = r_count_4.indexOf(redArr[j]);
+			if (search != -1) {
+			r_count_4.splice(search, 1);
+			}
+			r_count_4.push(redArr[j]);
+			}
+			}
 
-					for (j = 0; j < yellowCount; j++) {
-						if (Math.floor(yellowArr[j] / 10) == 0) {
-							y_count_0.push(yellowArr[j]);
-							// name.push(yellowArr[j]);
-						} else if (Math.floor(yellowArr[j] / 10) == 1) {
-							y_count_1.push(yellowArr[j]);
-							// name.push(yellowArr[j]);
-						} else if (Math.floor(yellowArr[j] / 10) == 2) {
-							y_count_2.push(yellowArr[j]);
-							// name.push(yellowArr[j]);
-						} else if (Math.floor(yellowArr[j] / 10) == 3) {
-							y_count_3.push(yellowArr[j]);
-							// name.push(yellowArr[j]);
-						} else if (Math.floor(yellowArr[j] / 10) == 4) {
-							y_count_4.push(yellowArr[j]);
-							// name.push(yellowArr[j]);
-						}
-					}
+			for (j = 0; j < yellowCount; j++) {
+			if (Math.floor(yellowArr[j] / 10) == 0) {
+			y_count_0.push(yellowArr[j]);
 
-					var no_to_1 =
-						Number(y_count_1.length) +
-						Number(y_count_2.length) +
-						Number(y_count_3.length) +
-						Number(y_count_4.length);
-					var no_to_2 =
-						Number(y_count_0.length) +
-						Number(y_count_2.length) +
-						Number(y_count_3.length) +
-						Number(y_count_4.length);
-					var no_to_3 =
-						Number(y_count_1.length) +
-						Number(y_count_0.length) +
-						Number(y_count_3.length) +
-						Number(y_count_4.length);
-					var no_to_4 =
-						Number(y_count_1.length) +
-						Number(y_count_2.length) +
-						Number(y_count_0.length) +
-						Number(y_count_4.length);
-					var no_to_5 =
-						Number(y_count_1.length) +
-						Number(y_count_2.length) +
-						Number(y_count_3.length) +
-						Number(y_count_0.length);
-					if (
-						(selNum1 != 0 && selNum1 > 9 - Number(r_count_0.length)) ||
-						(selNum1 != 0 && selNum1 < y_count_0.length) ||
-						(selNum1 != 0 && selNum1 > 6 - no_to_1)
-					) {
-						alert('Error: 1~9 선택갯수와 빨강(제외) or 노랑(포함) 갯수를 확인하세요. ');
-						result = 1;
-					} else if (
-						(selNum2 != 0 && selNum2 > 10 - Number(r_count_1.length)) ||
-						(selNum2 != 0 && selNum2 < y_count_1.length) ||
-						(selNum2 != 0 && selNum2 > 6 - no_to_2)
-					) {
-						alert(
-							'Error: 10~19 선택갯수와 빨강(제외) or 노랑(포함) 갯수를 확인하세요.'
-						);
-						result = 1;
-					} else if (
-						(selNum3 != 0 && selNum3 > 10 - Number(r_count_2.length)) ||
-						(selNum3 != 0 && selNum3 < y_count_2.length) ||
-						(selNum3 != 0 && selNum3 > 6 - no_to_3)
-					) {
-						alert(
-							'Error: 20~29 선택갯수와 빨강(제외) or 노랑(포함) 갯수를 확인하세요.'
-						);
-						result = 1;
-					} else if (
-						(selNum4 != 0 && selNum4 > 10 - Number(r_count_3.length)) ||
-						(selNum4 != 0 && selNum4 < y_count_3.length) ||
-						(selNum4 != 0 && selNum4 > 6 - no_to_4)
-					) {
-						alert(
-							'Error: 30~39 선택갯수와 빨강(제외) or 노랑(포함) 갯수를 확인하세요.'
-						);
-						result = 1;
-					} else if (
-						(selNum5 != 0 && selNum5 > 6 - Number(r_count_4.length)) ||
-						(selNum5 != 0 && selNum5 < y_count_4.length) ||
-						(selNum5 != 0 && selNum5 > 6 - no_to_5)
-					) {
-						alert(
-							'Error: 40~45 선택갯수와 빨강(제외) or 노랑(포함) 갯수를 확인하세요.'
-						);
-						result = 1;
-					}
+			} else if (Math.floor(yellowArr[j] / 10) == 1) {
+			y_count_1.push(yellowArr[j]);
 
-					var null_count_1 = 0;
-					var null_count_2 = 0;
-					var null_count_3 = 0;
-					var null_count_4 = 0;
-					var null_count_5 = 0;
-					if (selNum1 == 0 && y_count_0.length > 0) {
-						null_count_1 = y_count_0.length;
-					}
-					if (selNum2 == 0 && y_count_1.length > 0) {
-						null_count_2 = y_count_1.length;
-					}
-					if (selNum3 == 0 && y_count_2.length > 0) {
-						null_count_3 = y_count_2.length;
-					}
-					if (selNum4 == 0 && y_count_3.length > 0) {
-						null_count_4 = y_count_3.length;
-					}
-					if (selNum5 == 0 && y_count_4.length > 0) {
-						null_count_5 = y_count_4.length;
-					}
-					var null_total =
-						Number(null_count_1) +
-						Number(null_count_2) +
-						Number(null_count_3) +
-						Number(null_count_4) +
-						Number(null_count_5);
+			} else if (Math.floor(yellowArr[j] / 10) == 2) {
+			y_count_2.push(yellowArr[j]);
 
-					if (null_total + selTotal > 6) {
-						alert('Error: 선택갯수와 빨강(제외) or 노랑(포함) 갯수를 확인하세요.');
-						result = 1;
-					}
-				}
+			} else if (Math.floor(yellowArr[j] / 10) == 3) {
+			y_count_3.push(yellowArr[j]);
 
-				if (result == 0) {
-					generate_2(selNum1, selNum2, selNum3, selNum4, selNum5, selTotal);
-				}
+			} else if (Math.floor(yellowArr[j] / 10) == 4) {
+			y_count_4.push(yellowArr[j]);
+
+			}
+			}
+
+			var no_to_1 =
+			Number(y_count_1.length) +
+			Number(y_count_2.length) +
+			Number(y_count_3.length) +
+			Number(y_count_4.length);
+			var no_to_2 =
+			Number(y_count_0.length) +
+			Number(y_count_2.length) +
+			Number(y_count_3.length) +
+			Number(y_count_4.length);
+			var no_to_3 =
+			Number(y_count_1.length) +
+			Number(y_count_0.length) +
+			Number(y_count_3.length) +
+			Number(y_count_4.length);
+			var no_to_4 =
+			Number(y_count_1.length) +
+			Number(y_count_2.length) +
+			Number(y_count_0.length) +
+			Number(y_count_4.length);
+			var no_to_5 =
+			Number(y_count_1.length) +
+			Number(y_count_2.length) +
+			Number(y_count_3.length) +
+			Number(y_count_0.length);
+			if (
+			(selNum1 != 0 && selNum1 > 9 - Number(r_count_0.length)) ||
+			(selNum1 != 0 && selNum1 < y_count_0.length) ||
+			(selNum1 != 0 && selNum1 > 6 - no_to_1)
+			) {
+			alert('Error: 1~9 선택갯수와 빨강(제외) or 노랑(포함) 갯수를 확인하세요. ');
+			result = 1;
+			} else if (
+			(selNum2 != 0 && selNum2 > 10 - Number(r_count_1.length)) ||
+			(selNum2 != 0 && selNum2 < y_count_1.length) ||
+			(selNum2 != 0 && selNum2 > 6 - no_to_2)
+			) {
+			alert(
+			'Error: 10~19 선택갯수와 빨강(제외) or 노랑(포함) 갯수를 확인하세요.'
+			);
+			result = 1;
+			} else if (
+			(selNum3 != 0 && selNum3 > 10 - Number(r_count_2.length)) ||
+			(selNum3 != 0 && selNum3 < y_count_2.length) ||
+			(selNum3 != 0 && selNum3 > 6 - no_to_3)
+			) {
+			alert(
+			'Error: 20~29 선택갯수와 빨강(제외) or 노랑(포함) 갯수를 확인하세요.'
+			);
+			result = 1;
+			} else if (
+			(selNum4 != 0 && selNum4 > 10 - Number(r_count_3.length)) ||
+			(selNum4 != 0 && selNum4 < y_count_3.length) ||
+			(selNum4 != 0 && selNum4 > 6 - no_to_4)
+			) {
+			alert(
+			'Error: 30~39 선택갯수와 빨강(제외) or 노랑(포함) 갯수를 확인하세요.'
+			);
+			result = 1;
+			} else if (
+			(selNum5 != 0 && selNum5 > 6 - Number(r_count_4.length)) ||
+			(selNum5 != 0 && selNum5 < y_count_4.length) ||
+			(selNum5 != 0 && selNum5 > 6 - no_to_5)
+			) {
+			alert(
+			'Error: 40~45 선택갯수와 빨강(제외) or 노랑(포함) 갯수를 확인하세요.'
+			);
+			result = 1;
+			}
+
+			var null_count_1 = 0;
+			var null_count_2 = 0;
+			var null_count_3 = 0;
+			var null_count_4 = 0;
+			var null_count_5 = 0;
+			if (selNum1 == 0 && y_count_0.length > 0) {
+			null_count_1 = y_count_0.length;
+			}
+			if (selNum2 == 0 && y_count_1.length > 0) {
+			null_count_2 = y_count_1.length;
+			}
+			if (selNum3 == 0 && y_count_2.length > 0) {
+			null_count_3 = y_count_2.length;
+			}
+			if (selNum4 == 0 && y_count_3.length > 0) {
+			null_count_4 = y_count_3.length;
+			}
+			if (selNum5 == 0 && y_count_4.length > 0) {
+			null_count_5 = y_count_4.length;
+			}
+			var null_total =
+			Number(null_count_1) +
+			Number(null_count_2) +
+			Number(null_count_3) +
+			Number(null_count_4) +
+			Number(null_count_5);
+
+			if (null_total + selTotal > 6) {
+			alert('Error: 선택갯수와 빨강(제외) or 노랑(포함) 갯수를 확인하세요.');
+			result = 1;
+			}
+			}
+
+			if (result == 0) {
+			generate_2(selNum1, selNum2, selNum3, selNum4, selNum5, selTotal);
+			}
 			}
 
 			function generate_2(a, b, c, d, e, t) {
-				// while (arrayOfNumbers.length < 6) {
-				//     let number = Math.floor(Math.random() * maxNum) + 1;
+			var numArr = new Array();
 
-				//     if (arrayOfNumbers.indexOf(number) == -1) {
-				//         arrayOfNumbers.push(number);
-				//     }
-				// }
-				var numArr = new Array();
+			for (i = 0; i < 45; i++) {
+			numArr[i] = i + 1;
+			}
 
-				for (i = 0; i < 45; i++) {
-					numArr[i] = i + 1;
-				}
+			if (redCount != 0) {
+			for (j = 0; j < redCount; j++) {
+			var search = numArr.indexOf(redArr[j]);
+			if (search != -1) {
+			numArr.splice(search, 1);
+			}
+			}
+			}
 
-				if (redCount != 0) {
-					for (j = 0; j < redCount; j++) {
-						// var search = arrayOfNumbers.indexOf(redArr[j]);
-						// if (search != -1) {
-						//     arrayOfNumbers.splice(search, 1);
-						// }
-						var search = numArr.indexOf(redArr[j]);
-						if (search != -1) {
-							numArr.splice(search, 1);
-						}
-					}
-				}
+			var numResult1 = new Array();
+			var numResult2 = new Array();
+			var numResult3 = new Array();
+			var numResult4 = new Array();
+			var numResult5 = new Array();
+			if (yellowCount != 0) {
+			for (j = 0; j < yellowCount; j++) {
+			var search = numArr.indexOf(yellowArr[j]);
 
-				var numResult1 = new Array();
-				var numResult2 = new Array();
-				var numResult3 = new Array();
-				var numResult4 = new Array();
-				var numResult5 = new Array();
-				if (yellowCount != 0) {
-					for (j = 0; j < yellowCount; j++) {
-						var search = numArr.indexOf(yellowArr[j]);
+			if (search != -1) {
+			numArr.splice(search, 1);
+			}
 
-						if (search != -1) {
-							numArr.splice(search, 1);
-						}
+			if (Math.floor(yellowArr[j] / 10) == 0) {
+			numResult1.push(yellowArr[j]);
+			} else if (Math.floor(yellowArr[j] / 10) == 1) {
+			numResult2.push(yellowArr[j]);
+			} else if (Math.floor(yellowArr[j] / 10) == 2) {
+			numResult3.push(yellowArr[j]);
+			} else if (Math.floor(yellowArr[j] / 10) == 3) {
+			numResult4.push(yellowArr[j]);
+			} else if (Math.floor(yellowArr[j] / 10) == 4) {
+			numResult5.push(yellowArr[j]);
+			}
+			}
+			}
 
-						if (Math.floor(yellowArr[j] / 10) == 0) {
-							numResult1.push(yellowArr[j]);
-						} else if (Math.floor(yellowArr[j] / 10) == 1) {
-							numResult2.push(yellowArr[j]);
-						} else if (Math.floor(yellowArr[j] / 10) == 2) {
-							numResult3.push(yellowArr[j]);
-						} else if (Math.floor(yellowArr[j] / 10) == 3) {
-							numResult4.push(yellowArr[j]);
-						} else if (Math.floor(yellowArr[j] / 10) == 4) {
-							numResult5.push(yellowArr[j]);
-						}
-					}
-				}
+			var num_set1 = new Array();
+			var num_set2 = new Array();
+			var num_set3 = new Array();
+			var num_set4 = new Array();
+			var num_set5 = new Array();
 
-				var num_set1 = new Array();
-				var num_set2 = new Array();
-				var num_set3 = new Array();
-				var num_set4 = new Array();
-				var num_set5 = new Array();
+			var lend_1 = new Array();
+			var lend_2 = new Array();
+			var lend_3 = new Array();
+			var lend_4 = new Array();
+			var lend_5 = new Array();
 
-				var lend_1 = new Array();
-				var lend_2 = new Array();
-				var lend_3 = new Array();
-				var lend_4 = new Array();
-				var lend_5 = new Array();
+			if (a != 0 || b != 0 || c != 0 || d != 0 || e != 0) {
+			for (i = 0; i < numArr.length; i++) {
+			if (Math.floor(numArr[i] / 10) == 0) {
+			num_set1.push(numArr[i]);
+			} else if (Math.floor(numArr[i] / 10) == 1) {
+			num_set2.push(numArr[i]);
+			} else if (Math.floor(numArr[i] / 10) == 2) {
+			num_set3.push(numArr[i]);
+			} else if (Math.floor(numArr[i] / 10) == 3) {
+			num_set4.push(numArr[i]);
+			} else if (Math.floor(numArr[i] / 10) == 4) {
+			num_set5.push(numArr[i]);
+			}
+			}
 
-				if (a != 0 || b != 0 || c != 0 || d != 0 || e != 0) {
-					for (i = 0; i < numArr.length; i++) {
-						if (Math.floor(numArr[i] / 10) == 0) {
-							num_set1.push(numArr[i]);
-						} else if (Math.floor(numArr[i] / 10) == 1) {
-							num_set2.push(numArr[i]);
-						} else if (Math.floor(numArr[i] / 10) == 2) {
-							num_set3.push(numArr[i]);
-						} else if (Math.floor(numArr[i] / 10) == 3) {
-							num_set4.push(numArr[i]);
-						} else if (Math.floor(numArr[i] / 10) == 4) {
-							num_set5.push(numArr[i]);
-						}
-					}
+			if (a != numResult1.length) {
+			var num_plus = new Array();
+			var coCot = a - Number(numResult1.length);
 
-					if (a != numResult1.length) {
-						var num_plus = new Array();
-						var coCot = a - Number(numResult1.length);
+			for (j = 0; j < coCot; j++) {
+			num_plus[j] = num_set1[Math.floor(Math.random() * num_set1.length)];
+			var search = numArr.indexOf(num_plus[j]);
+			if (search != -1) {
+			numArr.splice(search, 1);
+			}
+			var search = num_set1.indexOf(num_plus[j]);
+			if (search != -1) {
+			num_set1.splice(search, 1);
+			}
+			}
 
-						for (j = 0; j < coCot; j++) {
-							num_plus[j] = num_set1[Math.floor(Math.random() * num_set1.length)];
-							var search = numArr.indexOf(num_plus[j]);
-							if (search != -1) {
-								numArr.splice(search, 1);
-							}
-							var search = num_set1.indexOf(num_plus[j]);
-							if (search != -1) {
-								num_set1.splice(search, 1);
-							}
-						}
+			for (i = 0; i < num_set1.length; i++) {
+			var search = numArr.indexOf(num_set1[i]);
+			if (search != -1) {
+			numArr.splice(search, 1);
+			}
+			}
+			lend_1 = num_plus;
+			} else if (a == numResult1.length) {
+			lend_1 = [];
+			}
 
-						for (i = 0; i < num_set1.length; i++) {
-							var search = numArr.indexOf(num_set1[i]);
-							if (search != -1) {
-								numArr.splice(search, 1);
-							}
-						}
-						lend_1 = num_plus;
-					} else if (a == numResult1.length) {
-						lend_1 = [];
-					}
+			if (b != numResult2.length) {
+			var num_plus = new Array();
+			var coCot = b - Number(numResult2.length);
+			for (j = 0; j < coCot; j++) {
+			num_plus[j] = num_set2[Math.floor(Math.random() * num_set2.length)];
+			var search = numArr.indexOf(num_plus[j]);
+			if (search != -1) {
+			numArr.splice(search, 1);
+			}
+			var search = num_set2.indexOf(num_plus[j]);
+			if (search != -1) {
+			num_set2.splice(search, 1);
+			}
+			}
+			for (i = 0; i < num_set2.length; i++) {
+			var search = numArr.indexOf(num_set2[i]);
+			if (search != -1) {
+			numArr.splice(search, 1);
+			}
+			}
+			lend_2 = num_plus;
+			} else if (b == numResult2.length) {
+			lend_2 = [];
+			}
 
-					if (b != numResult2.length) {
-						var num_plus = new Array();
-						var coCot = b - Number(numResult2.length);
-						for (j = 0; j < coCot; j++) {
-							num_plus[j] = num_set2[Math.floor(Math.random() * num_set2.length)];
-							var search = numArr.indexOf(num_plus[j]);
-							if (search != -1) {
-								numArr.splice(search, 1);
-							}
-							var search = num_set2.indexOf(num_plus[j]);
-							if (search != -1) {
-								num_set2.splice(search, 1);
-							}
-						}
-						for (i = 0; i < num_set2.length; i++) {
-							var search = numArr.indexOf(num_set2[i]);
-							if (search != -1) {
-								numArr.splice(search, 1);
-							}
-						}
-						lend_2 = num_plus;
-					} else if (b == numResult2.length) {
-						lend_2 = [];
-					}
+			if (c != numResult3.length) {
+			var num_plus = new Array();
+			var coCot = c - Number(numResult3.length);
+			for (j = 0; j < coCot; j++) {
+			num_plus[j] = num_set3[Math.floor(Math.random() * num_set3.length)];
+			var search = numArr.indexOf(num_plus[j]);
+			if (search != -1) {
+			numArr.splice(search, 1);
+			}
+			var search = num_set3.indexOf(num_plus[j]);
+			if (search != -1) {
+			num_set3.splice(search, 1);
+			}
+			}
+			for (i = 0; i < num_set3.length; i++) {
+			var search = numArr.indexOf(num_set3[i]);
+			if (search != -1) {
+			numArr.splice(search, 1);
+			}
+			}
+			lend_3 = num_plus;
+			} else if (c == numResult3.length) {
+			lend_3 = [];
+			}
 
-					if (c != numResult3.length) {
-						var num_plus = new Array();
-						var coCot = c - Number(numResult3.length);
-						for (j = 0; j < coCot; j++) {
-							num_plus[j] = num_set3[Math.floor(Math.random() * num_set3.length)];
-							var search = numArr.indexOf(num_plus[j]);
-							if (search != -1) {
-								numArr.splice(search, 1);
-							}
-							var search = num_set3.indexOf(num_plus[j]);
-							if (search != -1) {
-								num_set3.splice(search, 1);
-							}
-						}
-						for (i = 0; i < num_set3.length; i++) {
-							var search = numArr.indexOf(num_set3[i]);
-							if (search != -1) {
-								numArr.splice(search, 1);
-							}
-						}
-						lend_3 = num_plus;
-					} else if (c == numResult3.length) {
-						lend_3 = [];
-					}
+			if (d != numResult4.length) {
+			var num_plus = new Array();
+			var coCot = d - Number(numResult4.length);
+			for (j = 0; j < coCot; j++) {
+			num_plus[j] = num_set4[Math.floor(Math.random() * num_set4.length)];
+			var search = numArr.indexOf(num_plus[j]);
+			if (search != -1) {
+			numArr.splice(search, 1);
+			}
+			var search = num_set4.indexOf(num_plus[j]);
+			if (search != -1) {
+			num_set4.splice(search, 1);
+			}
+			}
+			for (i = 0; i < num_set4.length; i++) {
+			var search = numArr.indexOf(num_set4[i]);
+			if (search != -1) {
+			numArr.splice(search, 1);
+			}
+			}
+			lend_4 = num_plus;
+			} else if (d == numResult4.length) {
+			lend_4 = [];
+			}
 
-					if (d != numResult4.length) {
-						var num_plus = new Array();
-						var coCot = d - Number(numResult4.length);
-						for (j = 0; j < coCot; j++) {
-							num_plus[j] = num_set4[Math.floor(Math.random() * num_set4.length)];
-							var search = numArr.indexOf(num_plus[j]);
-							if (search != -1) {
-								numArr.splice(search, 1);
-							}
-							var search = num_set4.indexOf(num_plus[j]);
-							if (search != -1) {
-								num_set4.splice(search, 1);
-							}
-						}
-						for (i = 0; i < num_set4.length; i++) {
-							var search = numArr.indexOf(num_set4[i]);
-							if (search != -1) {
-								numArr.splice(search, 1);
-							}
-						}
-						lend_4 = num_plus;
-					} else if (d == numResult4.length) {
-						lend_4 = [];
-					}
+			if (e != numResult5.length) {
+			var num_plus = new Array();
+			var coCot = e - Number(numResult5.length);
+			for (j = 0; j < coCot; j++) {
+			num_plus[j] = num_set5[Math.floor(Math.random() * num_set5.length)];
+			var search = numArr.indexOf(num_plus[j]);
+			if (search != -1) {
+			numArr.splice(search, 1);
+			}
+			var search = num_set5.indexOf(num_plus[j]);
+			if (search != -1) {
+			num_set5.splice(search, 1);
+			}
+			}
+			for (i = 0; i < num_set5.length; i++) {
+			var search = numArr.indexOf(num_set5[i]);
+			if (search != -1) {
+			numArr.splice(search, 1);
+			}
+			}
+			lend_5 = num_plus;
+			} else if (e == numResult5.length) {
+			lend_5 = [];
+			}
+			}
 
-					if (e != numResult5.length) {
-						var num_plus = new Array();
-						var coCot = e - Number(numResult5.length);
-						for (j = 0; j < coCot; j++) {
-							num_plus[j] = num_set5[Math.floor(Math.random() * num_set5.length)];
-							var search = numArr.indexOf(num_plus[j]);
-							if (search != -1) {
-								numArr.splice(search, 1);
-							}
-							var search = num_set5.indexOf(num_plus[j]);
-							if (search != -1) {
-								num_set5.splice(search, 1);
-							}
-						}
-						for (i = 0; i < num_set5.length; i++) {
-							var search = numArr.indexOf(num_set5[i]);
-							if (search != -1) {
-								numArr.splice(search, 1);
-							}
-						}
-						lend_5 = num_plus;
-					} else if (e == numResult5.length) {
-						lend_5 = [];
-					}
-				}
+			var lend_to = yellowArr.concat(lend_1, lend_2, lend_3, lend_4, lend_5);
 
-				var lend_to = yellowArr.concat(lend_1, lend_2, lend_3, lend_4, lend_5);
+			if (6 - Number(lend_to.length) != 0) {
+			for (i = 0; i < 6 - Number(lend_to.length); i++) {
+			let number = numArr[Math.floor(Math.random() * numArr.length)];
 
-				if (6 - Number(lend_to.length) != 0) {
-					for (i = 0; i < 6 - Number(lend_to.length); i++) {
-						let number = numArr[Math.floor(Math.random() * numArr.length)];
+			if (arrayOfNumbers.indexOf(number) == -1) {
+			arrayOfNumbers.push(number);
+			}
 
-						if (arrayOfNumbers.indexOf(number) == -1) {
-							arrayOfNumbers.push(number);
-						}
+			if (arrayOfNumbers[arrayOfNumbers.length - 1] == undefined) {
+			alert('각 1개씩 포함하여 숫자가 5개만 나옵니다.');
+			}
+			var search = numArr.indexOf(number);
+			if (search != -1) {
+			numArr.splice(search, 1);
+			}
+			}
+			}
 
-						if (arrayOfNumbers[arrayOfNumbers.length - 1] == undefined) {
-							alert('각 1개씩 포함하여 숫자가 5개만 나옵니다.');
-						}
-						var search = numArr.indexOf(number);
-						if (search != -1) {
-							numArr.splice(search, 1);
-						}
-					}
-				}
+			arrayOfNumbers = arrayOfNumbers.concat(lend_to);
 
-				arrayOfNumbers = arrayOfNumbers.concat(lend_to);
-
-				arrayOfCombinations_2.push(
-					arrayOfNumbers.sort(function (a, b) {
-						return a - b;
-					})
-				);
+			arrayOfCombinations_2.push(
+			arrayOfNumbers.sort(function (a, b) {
+			return a - b;
+			})
+			);
 
 				for (i = 0; i < arrayOfCombinations_2.length; i++) {
-					duplication_2[i] = arrayOfCombinations_2[i];
-				}
+			duplication_2[i] = arrayOfCombinations_2[i];
+			}
 
-				arrayOfNumbers = [];
-				display(2);
+			arrayOfNumbers = [];
+			display(2);
 			}
 
 			function display(num) {
@@ -1445,9 +1399,13 @@
 
 					let lengthOfArray = arrayOfCombinations.length;
 					for (let i = 0; i < lengthOfArray; i++) {
-						listElement.innerHTML = `<div class="num-text-box p3" data-maxlength="200" id="update"><li class="popSel" value="1"><input type="checkbox" name="chk_info" value=${[
-							i,
-						]} class=${[i]}>&nbsp&nbsp${arrayOfCombinations[i].join(', ')}</li></div>`;
+						listElement.innerHTML =
+							'<div class="num-text-box p3" data-maxlength="200" id="update"><li class="popSel" value="1"><input type="checkbox" name="chk_info" class="'+i+'" value='+i+
+							'>&nbsp&nbsp' +
+							arrayOfCombinations[i].join(', ') +
+							'</li></div>';
+
+						console.log('aaa');
 					}
 				} else if (num == 2) {
 					let listElement = document.createElement('ul');
@@ -1455,11 +1413,11 @@
 					wrapper_2.appendChild(listElement);
 					let lengthOfArray = arrayOfCombinations_2.length;
 					for (let i = 0; i < lengthOfArray; i++) {
-						listElement.innerHTML = `<div class="num-text-box p3" data-maxlength="200" id="update"><li class="popSel" value="2"><input type="checkbox" name="chk_info" value=${[
-							i,
-						]} class=${[i]}>&nbsp&nbsp${arrayOfCombinations_2[i].join(
-							', '
-						)}</li></div>`;
+						listElement.innerHTML =
+							'<div class="num-text-box p3" data-maxlength="200" id="update"><li class="popSel" value="1"><input type="checkbox" name="chk_info" class="'+i+'" value='+i+
+							'>&nbsp&nbsp' +
+							arrayOfCombinations_2[i].join(', ') +
+							'</li></div>';
 					}
 				} else if (num == 3) {
 					$('.popSel').closest('ul').remove();
@@ -1468,68 +1426,75 @@
 
 			/* 삭제(체크박스된 것 전부) */
 			function fn_userDel() {
-				var userid = '';
-				var memberChk = document.getElementsByName('chk_info');
-
-				var chked = false;
-				var indexid = false;
-				for (i = 0; i < memberChk.length; i++) {
-					if (memberChk[i].checked) {
-						if (indexid) {
-							userid = userid + '-';
-						}
-						userid = userid + memberChk[i].value;
-						indexid = true;
-					}
-				}
-				var arr = new Array();
-				arr = userid.split('-');
-
-				if (!indexid) {
-					alert('삭제할 번호를 체크해 주세요.');
-					return;
-				} else {
-					for (i = 0; i < arr.length; i++) {
-						ret = '.' + arr[i];
-						$(ret).closest('ul').remove();
-						dupliChange.push(arrayOfCombinations[arr[i]]);
+			var userid = '';
+			var memberChk = document.getElementsByName('chk_info');
+			console.log("aaa"+memberChk);
+			var chked = false;
+			var indexid = false;
+			for (i = 0; i < memberChk.length; i++) {
+			if (memberChk[i].checked) {
+				
+			if (indexid) {
+			userid = userid + '-';
+			}
+		
+				
+			
+			userid = userid + memberChk[i].value.charAt(0);
+				console.log("use = "+userid);
+				
+			indexid = true;
+			}
+			}
+			var arr = new Array();
+			arr = userid.split('-');
+			console.log(arr);
+			if (!indexid) {
+			alert('삭제할 번호를 체크해 주세요.');
+			return;
+			} else {
+			for (i = 0; i < arr.length; i++) {
+			ret = '.' + arr[i];
+				console.log("ret = "+ret);
+			$(ret).closest('ul').remove();
+			dupliChange.push(arrayOfCombinations[arr[i]]);
 						dupliChange_2.push(arrayOfCombinations_2[arr[i]]);
-						ret = '';
-					}
-				}
+			ret = '';
+			}
+			}
 			}
 
 			function reSet_sel() {
-				document.getElementById('btnCot_0').value = 0;
-				document.getElementById('btnCot_1').value = 0;
-				document.getElementById('btnCot_2').value = 0;
-				document.getElementById('btnCot_3').value = 0;
-				document.getElementById('btnCot_4').value = 0;
+			document.getElementById('btnCot_0').value = 0;
+			document.getElementById('btnCot_1').value = 0;
+			document.getElementById('btnCot_2').value = 0;
+			document.getElementById('btnCot_3').value = 0;
+			document.getElementById('btnCot_4').value = 0;
 
-				document.getElementById('btnCot_0_0').value = 0;
-				document.getElementById('btnCot_1_1').value = 0;
-				document.getElementById('btnCot_2_2').value = 0;
-				document.getElementById('btnCot_3_3').value = 0;
-				document.getElementById('btnCot_4_4').value = 0;
+			document.getElementById('btnCot_0_0').value = 0;
+			document.getElementById('btnCot_1_1').value = 0;
+			document.getElementById('btnCot_2_2').value = 0;
+			document.getElementById('btnCot_3_3').value = 0;
+			document.getElementById('btnCot_4_4').value = 0;
 
-				for (i = 1; i <= 45; i++) {
-					const ClickNum = document.querySelector('#ClickNum' + i);
-					const hasClass = ClickNum.classList.contains('clickNumOne');
-					const hasClass_1 = ClickNum.classList.contains('clickNumTwo');
-					const hasClass_2 = ClickNum.classList.contains('clickNumThree');
-					if (!hasClass && hasClass_1 == true) {
-						ClickNum.classList.remove('clickNumTwo');
-						ClickNum.classList.add('clickNumOne');
-					} else if (!hasClass && hasClass_2 == true) {
-						ClickNum.classList.remove('clickNumThree');
-						ClickNum.classList.add('clickNumOne');
-					}
+			for (i = 1; i <= 45; i++) {
+			const ClickNum = document.querySelector('#ClickNum' + i);
+			const hasClass = ClickNum.classList.contains('clickNumOne');
+			const hasClass_1 = ClickNum.classList.contains('clickNumTwo');
+			const hasClass_2 = ClickNum.classList.contains('clickNumThree');
+			if (!hasClass && hasClass_1 == true) {
+			ClickNum.classList.remove('clickNumTwo');
+			ClickNum.classList.add('clickNumOne');
+			} else if (!hasClass && hasClass_2 == true) {
+			ClickNum.classList.remove('clickNumThree');
+			ClickNum.classList.add('clickNumOne');
+			}
 
-					redArr = [];
-					yellowArr = [];
-					redCount = 0;
-					yellowCount = 0;
-				}
+			redArr = [];
+			yellowArr = [];
+			redCount = 0;
+			yellowCount = 0;
+			}
 			}
 		</script>
 
@@ -1592,15 +1557,6 @@
 				}
 				alert('복사완료!');
 			});
-		</script>
-
-		<script>
-			let a = [];
-			console.log('bb');
-			console.log(a[0]);
-			if (a[0] == undefined) {
-				console.log('aa');
-			}
 		</script>
 	</body>
 
